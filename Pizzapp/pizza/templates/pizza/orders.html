@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %} Sipariş Ver{% endblock%}%
+
+{% block content2 %}
+
+    <div class="col">
+        <h3>Sipariş Ver</h3>
+        <hr>
+
+        <form action= '{% url 'order' %}' method="POST" >
+            {% csrf_token %}
+            <label for="pizza" class="mb-2" ><h5>Pizzalar</h5></label>
+              <select name='pizza' class="form-select mb-3">
+
+                {% for p in pizza %}
+                <option value="{{p.name}}">{{p.name}} ({{p.price}}₺) </option>
+                {% endfor %}
+              </select>
+            <label for="size" class="mb-2" ><h5>Boyut</h5></label>
+              <select name='size' class="form-select mb-3">
+                <option value="small">Küçük</option>
+                <option value="medium">Orta</option>
+                <option value="large">Büyük</option>
+              </select>
+              <h5>Ekstra Malzemeler</h5>
+              <hr>
+              <select name='extra' class="form-select mb-3" multiple>
+
+                {% for extra in extras %}
+                    <option value="{{extra.id}}">{{extra.name|title}} (+{{extra.price}}₺)</option>
+
+                {% endfor %}
+        
+              </select>
+
+
+
+              <input type="submit" value="Sipariş Ver">
+        </form>
+
+    </div>
+
+{% endblock  %}
+
+
+
+

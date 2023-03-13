@@ -1,0 +1,13 @@
+{% load static %}
+
+<div class="card mb-3">
+    <img src="{{p.image.url}}" class="card-img-top car" alt="{{p.name}}">
+    <div class="card-body">
+    <h5 class="card-title text-center">{{ p.name }}</h5>
+    <p class="card-text text-center">{{p.description|safe}}</p>
+    <h5 class="card-text text-center">{{ p.category.name|title }} Pizza</h5>
+    <p class="card-text text-center">{{ p.price }}₺</p>
+    <a href=" {% url 'order' %} " class="btn btn-primary" style="display: flow-root;">Sipariş Ver</a>
+    </div>
+</div>
+

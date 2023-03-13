@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} HomePage {%endblock%}
+
+{% block content2 %}
+
+<div class="col-9">
+    <h3>Favori Pizzalar</h3>
+    <hr>
+    <div class="row g-0">
+        {% for p in pizza %}
+                <div class="col-md-4">
+                    {% include 'partials/_card.html' %}
+                </div>
+        {% endfor %}     
+    </div>
+
+</div>
+{% endblock %}

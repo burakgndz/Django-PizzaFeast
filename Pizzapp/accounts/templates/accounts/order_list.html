@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Siparişlerim{% endblock  %}
+{% block content2 %}
+    <div class="col-9">
+        <div class="row g-0">
+            {% for order, count in zipped %}
+                    <div class="col-md-4">
+                        <div class="card mb-3" >
+                            <h5 class="card-title text-center mt-3">{{ count }} .Sipariş</h5>
+                          
+                            <img src="{{order.pizza.image.url}}" class="card-img-top car" alt="{{order.pizza.name}}">
+                            <div class="card-body" >
+                                <ul class="list-group list-group-flush"  >
+                                    <li class="list-group-item">
+                                        <h4 class="card-title text-center">{{ order.pizza.name|title }}</h4>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <h6 class="card-text text-center">{{order.pizza.description|safe}}</h6>
+                                    </li>
+                                    <li class="list-group-item">
+                                        {% for key, value in extras.items %}
+                                        {% if key == order.id %}
+                                            <p class="card-text text-center"><b>Ekstra Malzemeler:</b><br>
+                                            {% for v in value %}
+                                                {{v|title}}
+                                            {% endfor %}
+                                            </p>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <h6 class="card-text text-center">{{ order.pizza.category.name|title }}</h6>
+                                    </li>
+                                                  
+                                    <li class="list-group-item">
+                                        <p class="card-text text-center">Toplam Tutar: {{ order.total_price }}₺</p>
+                                    </li> 
+                                  </ul>
+                  
+                            </div>
+                        </div>
+                                    
+                    </div>
+            {% endfor %}     
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %} Kart Bilgileri {%endblock%}
+{% block content %}
+<div class="container mt-3">
+    <div class="col">
+        <h1>Kart Bilgileri</h1>
+        <hr>
+        {% if messages %}
+        <div class="alert alert-danger">
+       
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+    </div>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            {% if error  %}
+            <div class="alert alert-danger">
+                {{error}}
+            </div>
+            
+            {% endif %}
+  
+            <div class="row">
+                <div class="col mb-3">
+                    <label for="firstname" class='form-label'>Ad:</label>
+                    <input type="text" class='form-control' name='firstname' value={{info.first_name}}>
+                </div>
+                <div class="col mb-3">
+                    <label for="lastname" class='form-label'>Soyad:</label>
+                    <input type="text" class='form-control' name='lastname' value={{info.last_name}}>
+                </div>
+            </div>
+  
+            <div class="row">
+                <div class="col mb-3">
+                    <label for="phone_number" class="form-label">Telefon Numarası:</label>
+                    <input type="number" class='form-control' name="phone_number" placeholder="5XX-XXX-XX-XX" pattern="[1-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}" minlength="10" value={{info.phone_number}} required>
+                </div>
+                <div class="col mb-3">
+                    <label for="tc_no" class="form-label">TC Kimlik No:</label>
+                    <input type="number" class='form-control' name="tc_no"  value={{info.tc_no}} minlength="11" required>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mb-3">
+                    <label for="card_no" class="form-label">Kart No:</label>
+                    <input type="number" class='form-control' name="card_no"  value={{info.card_no}}  minlength="16" required>
+                </div>
+                <div class="col mb-3">    
+                    <label for="exp_month" class="form-label">Ay:</label>
+                    <input type="number" class='form-control' name="exp_month"  value={{info.exp_month}} min="1"  max="31" maxlength="2" required>
+                </div>
+                <div class="col mb-3">    
+                    <label for="exp_year" class="form-label">Yıl:</label>
+                    <input type="number" class='form-control' name="exp_year"  value={{info.exp_year}} min="2024"  max="2030" maxlength="4" required>
+                </div>
+                <div class="col mb-3">    
+                    <label for="cv2" class="form-label">Güvenlik Kodu:</label>
+                    <input type="number" class='form-control' name="cv2"  value={{info.cv2}} min="100"  maxlength="3" required>
+                </div>
+
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Güncelle" class="btn btn-primary">
+                
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{% endblock %}
